@@ -33,4 +33,4 @@ requires:
   MooseX::Getopt: 0
   MooseX::Traits::Pluggable: 0
   MooseX::Types::LoadableClass: 0
-version: 0.001
+version: 0.002
