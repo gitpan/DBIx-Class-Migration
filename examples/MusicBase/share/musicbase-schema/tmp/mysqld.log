@@ -1,0 +1,29 @@
+120215 21:12:35 [Warning] Setting lower_case_table_names=2 because file system for /Users/johnn/Desktop/DBIx-Class-Migration/examples/MusicBase/share/musicbase-schema/var/ is case insensitive
+120215 21:12:35 [Warning] One can only use the --user switch if running as root
+
+120215 21:12:35 [Note] Plugin 'FEDERATED' is disabled.
+InnoDB: The first specified data file ./ibdata1 did not exist:
+InnoDB: a new database to be created!
+120215 21:12:36  InnoDB: Setting file ./ibdata1 size to 10 MB
+InnoDB: Database physically writes the file full: wait...
+120215 21:12:36  InnoDB: Log file ./ib_logfile0 did not exist: new to be created
+InnoDB: Setting log file ./ib_logfile0 size to 5 MB
+InnoDB: Database physically writes the file full: wait...
+120215 21:12:36  InnoDB: Log file ./ib_logfile1 did not exist: new to be created
+InnoDB: Setting log file ./ib_logfile1 size to 5 MB
+InnoDB: Database physically writes the file full: wait...
+InnoDB: Doublewrite buffer not found: creating new
+InnoDB: Doublewrite buffer created
+InnoDB: Creating foreign key constraint system tables
+InnoDB: Foreign key constraint system tables created
+120215 21:12:36  InnoDB: Started; log sequence number 0 0
+120215 21:12:36 [Note] Event Scheduler: Loaded 0 events
+120215 21:12:36 [Note] /usr/local/mysql/bin/mysqld: ready for connections.
+Version: '5.1.42'  socket: '/Users/johnn/Desktop/DBIx-Class-Migration/examples/MusicBase/share/musicbase-schema/tmp/mysql.sock'  port: 3306  MySQL Community Server (GPL)
+120216 14:24:48 [Note] /usr/local/mysql/bin/mysqld: Normal shutdown
+
+120216 14:24:48 [Note] Event Scheduler: Purging the queue. 0 events
+120216 14:24:48  InnoDB: Starting shutdown...
+120216 14:24:50  InnoDB: Shutdown completed; log sequence number 0 62783
+120216 14:24:50 [Note] /usr/local/mysql/bin/mysqld: Shutdown complete
+

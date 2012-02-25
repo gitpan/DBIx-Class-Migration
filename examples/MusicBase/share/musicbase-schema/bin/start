@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+/usr/local/mysql/bin/mysqld --defaults-file=/Users/johnn/Desktop/DBIx-Class-Migration/examples/MusicBase/share/musicbase-schema/etc/my.cnf &
