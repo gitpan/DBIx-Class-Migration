@@ -28,6 +28,7 @@ my %WriteMakefileArgs = (
   "NAME" => "DBIx::Class::Migration",
   "PREREQ_PM" => {
     "Class::Load" => 0,
+    "DBD::Sqlite" => 0,
     "DBIx::Class::DeploymentHandler" => "0.001008",
     "DBIx::Class::Fixtures" => "1.001014",
     "DBIx::Class::Schema::Loader" => "0.07017",
@@ -44,7 +45,7 @@ my %WriteMakefileArgs = (
     "MooseX::Traits::Pluggable" => 0,
     "MooseX::Types::LoadableClass" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "test" => {
     "TESTS" => "t/*.t"
   }
