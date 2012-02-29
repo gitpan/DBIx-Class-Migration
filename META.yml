@@ -36,4 +36,4 @@ requires:
   MooseX::Traits::Pluggable: 0
   MooseX::Types::LoadableClass: 0
   Pod::Usage: 0
-version: 0.006
+version: 0.007
