@@ -109,6 +109,29 @@ NEW_SCOPE_FOR_SCHEMA: {
   ok $schema->resultset('Country')->find({code=>'bel'}),
     'got some previously inserted data';
 
+  SCOPE_FOR_ALREADY_RUNNING: {
+
+    ## The database is still running, lets make sure we can connect
+    ## and use it without generating an error
+    
+    SKIP: {
+      skip "Test::mysqld not patched yet", 3
+        unless (eval qq{use Test::mysqld 0.15; 1} || 0);
+
+      ok( my $migration = DBIx::Class::Migration->new(
+        schema_class=>'Local::Schema',
+        db_sandbox_class=>'DBIx::Class::Migration::MySQLSandbox'),
+        'created migration with schema_class #3');
+
+      isa_ok(
+        my $schema = $migration->schema, 'Local::Schema',
+        'got a reasonable looking schema');
+
+      ok $schema->resultset('Country')->find({code=>'fra'}),
+        'got some previously inserted data';
+    }
+  }
+
 }
 
 done_testing;

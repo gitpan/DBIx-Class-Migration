@@ -1,5 +1,13 @@
 Revision history for DBIx-Class-Migration
 
+0.009   01 March 2012
+        - changed the way we look for a schema so that commands that don't need
+          one (like help and version) can still run.
+        - if a postgresql sandbox is already running, just use it and don't try
+          (and fail) to start it again.
+        - changed the mysql sandbox code so that when Test::mysqld is patched
+          it will work just like postgresql does in the above change-line.
+
 0.008   01 March 2012
         - Fixed failing test when optional dependency is not installed
         - help command now does something meaningful (felliott++)

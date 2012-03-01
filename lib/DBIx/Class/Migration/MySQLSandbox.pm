@@ -40,6 +40,9 @@ sub _build_test_mysqld {
     my $conf = Config::Tiny->read( catfile($base_dir, 'etc', 'my.cnf') ) ||
       die "Can't read my.cnf file";
     $my_cnf = { socket => $conf->{mysqld}->{socket} };
+    if( -e $conf->{mysqld}->{socket}) {
+      $auto_start = 0;
+    }
   }
 
   return Test::mysqld->new(

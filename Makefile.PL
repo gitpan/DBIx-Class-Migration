@@ -48,7 +48,7 @@ my %WriteMakefileArgs = (
     "Pod::Find" => 0,
     "Pod::Usage" => 0
   },
-  "VERSION" => "0.008",
+  "VERSION" => "0.009",
   "test" => {
     "TESTS" => "t/*.t"
   }

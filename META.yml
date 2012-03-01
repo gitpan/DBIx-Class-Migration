@@ -37,4 +37,4 @@ requires:
   MooseX::Types::LoadableClass: 0
   Pod::Find: 0
   Pod::Usage: 0
-version: 0.008
+version: 0.009
