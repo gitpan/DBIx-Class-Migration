@@ -240,6 +240,7 @@ lib/DBIx/Class/Migration/Tutorial/Setup.pod
 lib/DBIx/Class/Migration/Tutorial/Testing.pod
 lib/DBIx/Class/Migration/Tutorial/ThirdMigration.pod
 lib/Test/DBIx/Class/FixtureCommand/Population.pm
+t/help.t
 t/lib/Local/Schema.pm
 t/lib/Local/Schema/Result/Artist.pm
 t/lib/Local/Schema/Result/ArtistCd.pm
