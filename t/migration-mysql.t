@@ -121,7 +121,7 @@ NEW_SCOPE_FOR_SCHEMA: {
       ok( my $migration = DBIx::Class::Migration->new(
         schema_class=>'Local::Schema',
         db_sandbox_class=>'DBIx::Class::Migration::MySQLSandbox'),
-        'created migration with schema_class #3');
+        'created migration with schema_class 3');
 
       isa_ok(
         my $schema = $migration->schema, 'Local::Schema',
@@ -131,6 +131,34 @@ NEW_SCOPE_FOR_SCHEMA: {
         'got some previously inserted data';
     }
   }
+
+}
+
+SCOPE_FOR_PARALLEL_TEMP: {
+
+    ok( my $migration1 = DBIx::Class::Migration->new(
+      schema_class=>'Local::Schema',
+      db_sandbox_builder_class => 'DBIx::Class::Migration::TempDirSandboxBuilder',
+      db_sandbox_class=>'DBIx::Class::Migration::MySQLSandbox'),
+        'created migration with schema_class in temp 1');
+
+    $migration1->install;
+
+    ok( my $migration2 = DBIx::Class::Migration->new(
+      schema_class=>'Local::Schema',
+      db_sandbox_builder_class => 'DBIx::Class::Migration::TempDirSandboxBuilder',
+      db_sandbox_class=>'DBIx::Class::Migration::MySQLSandbox'),
+        'created migration with schema_class in temp 2');
+
+    $migration2->install;
+
+    ok( my $migration3 = DBIx::Class::Migration->new(
+      schema_class=>'Local::Schema',
+      db_sandbox_builder_class => 'DBIx::Class::Migration::TempDirSandboxBuilder',
+      db_sandbox_class=>'DBIx::Class::Migration::MySQLSandbox'),
+        'created migration with schema_class in temp 3');
+
+    $migration3->install;
 
 }
 

@@ -28,7 +28,7 @@ my %WriteMakefileArgs = (
   "NAME" => "DBIx::Class::Migration",
   "PREREQ_PM" => {
     "Class::Load" => 0,
-    "Config::Tiny" => 0,
+    "Config::MySQL" => 0,
     "DBD::SQLite" => 0,
     "DBIx::Class::DeploymentHandler" => "0.001008",
     "DBIx::Class::Fixtures" => "1.001014",
@@ -48,7 +48,7 @@ my %WriteMakefileArgs = (
     "Pod::Find" => 0,
     "Pod::Usage" => 0
   },
-  "VERSION" => "0.009",
+  "VERSION" => "0.010",
   "test" => {
     "TESTS" => "t/*.t"
   }
