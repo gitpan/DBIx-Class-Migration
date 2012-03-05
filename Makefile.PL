@@ -30,7 +30,7 @@ my %WriteMakefileArgs = (
     "Class::Load" => 0,
     "Config::MySQL" => 0,
     "DBD::SQLite" => 0,
-    "DBIx::Class::DeploymentHandler" => "0.001008",
+    "DBIx::Class::DeploymentHandler" => "0.002100",
     "DBIx::Class::Fixtures" => "1.001014",
     "DBIx::Class::Schema::Loader" => "0.07017",
     "Devel::PartialDump" => 0,
@@ -47,7 +47,7 @@ my %WriteMakefileArgs = (
     "MooseX::Types::LoadableClass" => 0,
     "Pod::Parser" => "1.51"
   },
-  "VERSION" => "0.012",
+  "VERSION" => "0.013",
   "test" => {
     "TESTS" => "t/*.t"
   }

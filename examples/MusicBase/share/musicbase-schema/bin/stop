@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-kill $(cat /Users/johnn/Desktop/DBIx-Class-Migration/examples/MusicBase/share/musicbase-schema/tmp/mysqld.pid)
