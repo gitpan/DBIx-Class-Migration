@@ -45,10 +45,9 @@ my %WriteMakefileArgs = (
     "MooseX::Getopt" => 0,
     "MooseX::Traits::Pluggable" => 0,
     "MooseX::Types::LoadableClass" => 0,
-    "Pod::Find" => 0,
-    "Pod::Usage" => 0
+    "Pod::Parser" => "1.51"
   },
-  "VERSION" => "0.011",
+  "VERSION" => "0.012",
   "test" => {
     "TESTS" => "t/*.t"
   }
