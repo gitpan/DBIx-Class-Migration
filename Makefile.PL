@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
     "Devel::PartialDump" => 0,
     "File::Copy" => 0,
     "File::Path" => 0,
-    "File::ShareDir::ProjectDistDir" => "0.2.0",
+    "File::ShareDir::ProjectDistDir" => "v0.3.1",
     "File::Spec" => 0,
     "File::Temp" => 0,
     "JSON::XS" => 0,
@@ -45,9 +45,10 @@ my %WriteMakefileArgs = (
     "MooseX::Getopt" => 0,
     "MooseX::Traits::Pluggable" => 0,
     "MooseX::Types::LoadableClass" => 0,
-    "Pod::Parser" => "1.51"
+    "Pod::Parser" => "1.51",
+    "version" => "0.77"
   },
-  "VERSION" => "0.013",
+  "VERSION" => "0.014",
   "test" => {
     "TESTS" => "t/*.t"
   }
