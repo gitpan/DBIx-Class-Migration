@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
     "Devel::PartialDump" => 0,
     "File::Copy" => 0,
     "File::Path" => 0,
-    "File::ShareDir::ProjectDistDir" => "v0.3.1",
+    "File::ShareDir::ProjectDistDir" => "0.003001",
     "File::Spec" => 0,
     "File::Temp" => 0,
     "JSON::XS" => 0,
@@ -48,7 +48,7 @@ my %WriteMakefileArgs = (
     "Pod::Parser" => "1.51",
     "version" => "0.77"
   },
-  "VERSION" => "0.015",
+  "VERSION" => "0.016",
   "test" => {
     "TESTS" => "t/*.t"
   }
