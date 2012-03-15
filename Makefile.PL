@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Make it easy to migrate DBIC based databases",
+  "ABSTRACT" => "Tools to make migrating your DBIx::Class databases easier",
   "AUTHOR" => "John Napiorkowski <jjnapiork\@cpan.org>",
   "BUILD_REQUIRES" => {
     "File::Path" => 0,
@@ -49,7 +49,7 @@ my %WriteMakefileArgs = (
     "SQL::Translator" => "0.11010",
     "version" => "0.77"
   },
-  "VERSION" => "0.017",
+  "VERSION" => "0.018",
   "test" => {
     "TESTS" => "t/*.t"
   }

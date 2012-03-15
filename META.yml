@@ -1,5 +1,5 @@
 ---
-abstract: 'Make it easy to migrate DBIC based databases'
+abstract: 'Tools to make migrating your DBIx::Class databases easier'
 author:
   - 'John Napiorkowski <jjnapiork@cpan.org>'
 build_requires:
@@ -38,4 +38,4 @@ requires:
   Pod::Parser: 1.51
   SQL::Translator: 0.11010
   version: 0.77
-version: 0.017
+version: 0.018

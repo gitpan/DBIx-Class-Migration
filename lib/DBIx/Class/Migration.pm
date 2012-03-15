@@ -1,6 +1,6 @@
 package DBIx::Class::Migration;
 
-our $VERSION = "0.017";
+our $VERSION = "0.018";
 
 use Moose;
 use JSON::XS;
@@ -430,21 +430,29 @@ sub make_schema {
 
 sub diagram {
   my $self = shift;
+  my $number_tables = scalar $self->schema->sources;
+  my $dimension = int sqrt($number_tables * 13);
   my $trans = SQL::Translator->new(
     parser => 'SQL::Translator::Parser::DBIx::Class',
     parser_args => { package => $self->schema },
     producer => 'GraphViz',
     producer_args => {
       skip_tables => 'dbix_class_deploymenthandler_versions',
+      width => $dimension,
+      height => $dimension,
       show_constraints => 1,
       show_datatypes => 1,
       show_sizes => 1,
-      out_file  => catfile(
-        $self->target_dir, 'db-diagram-v' . $self->dbic_dh->schema_version . '.png')});
+      out_file  => $self->_diagram_default_outfile });
 
   $trans->translate
     or die $trans->error;
 }
+
+  sub _diagram_default_outfile {
+    my $self = shift;
+    catfile $self->target_dir, 'db-diagram-v' . $self->dbic_dh->schema_version . '.png';
+  }
 
 sub install_if_needed {
   my ($self, %callbacks) = @_;
@@ -455,6 +463,16 @@ sub install_if_needed {
     } elsif( my $default_fixture_sets = delete($callbacks{default_fixture_sets})) {
       $self->populate(@$default_fixture_sets);
     }
+  }
+}
+
+sub install_version_storage {
+  my $self = shift;
+  if(!$self->dbic_dh->version_storage_is_installed) {
+    $self->dbic_db->install_version_storage;
+    print "Version storage has been installed in the target database\n";
+  } else {
+    print "Version storage is already installed in the target database!\n";
   }
 }
 
@@ -949,11 +967,23 @@ object).
 
 Accepts: Arrayref of fixture sets
 
+    $migration->install_if_needed(
+      default_fixture_sets => ['all_tables']);
+
 After database installation, populate the fixtures in order.
 
 =back
 
-Currently we allow one callback C<on_install> which gets passed two arguments:
+=head2 install_version_storage
+
+If the targeted (connected) database does not have the versioning tables
+installed, this will install them.  The version is set to whatever your
+C<schema> version currently is.
+
+You will only need to use this command in the case where you have an existing
+database that you are reverse engineering and you need to setup versioning
+storage since you can't rebuild the database from scratch (such as if you have
+a huge production database that you now want to start versioning).
 
 =head1 THANKS
 
