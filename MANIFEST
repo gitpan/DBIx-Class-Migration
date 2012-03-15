@@ -23,6 +23,7 @@ examples/MusicBase/lib/MusicBase/Web.pm
 examples/MusicBase/lib/MusicBase/Web/Controller/Root.pm
 examples/MusicBase/lib/MusicBase/Web/Model/Schema.pm
 examples/MusicBase/lib/MusicBase/Web/View/HTML.pm
+examples/MusicBase/share/db-diagram-v3.png
 examples/MusicBase/share/etc/musicbase_web.pl
 examples/MusicBase/share/etc/musicbase_web_test.pl
 examples/MusicBase/share/fixtures/1/all_tables/_dumper_version
@@ -155,6 +156,7 @@ lib/DBIx/Class/Migration/Tutorial/Setup.pod
 lib/DBIx/Class/Migration/Tutorial/Testing.pod
 lib/DBIx/Class/Migration/Tutorial/ThirdMigration.pod
 lib/Test/DBIx/Class/FixtureCommand/Population.pm
+t/00-clean.t
 t/help.t
 t/lib/Local/Schema.pm
 t/lib/Local/Schema/Result/Artist.pm

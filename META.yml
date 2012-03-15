@@ -36,5 +36,6 @@ requires:
   MooseX::Traits::Pluggable: 0
   MooseX::Types::LoadableClass: 0
   Pod::Parser: 1.51
+  SQL::Translator: 0.11010
   version: 0.77
-version: 0.016
+version: 0.017
