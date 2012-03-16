@@ -18,8 +18,8 @@ meta-spec:
 name: DBIx-Class-Migration
 requires:
   Class::Load: 0
-  Config::MySQL: 0
-  DBD::SQLite: 0
+  Config::MySQL: 0.02
+  DBD::SQLite: 1.35
   DBIx::Class::DeploymentHandler: 0.002100
   DBIx::Class::Fixtures: 1.001014
   DBIx::Class::Schema::Loader: 0.07017
@@ -29,13 +29,13 @@ requires:
   File::ShareDir::ProjectDistDir: 0.003001
   File::Spec: 0
   File::Temp: 0
-  JSON::XS: 0
+  JSON::XS: 2.32
   Moose: 0
-  MooseX::Attribute::ENV: 0
+  MooseX::Attribute::ENV: 0.02
   MooseX::Getopt: 0
   MooseX::Traits::Pluggable: 0
   MooseX::Types::LoadableClass: 0
   Pod::Parser: 1.51
   SQL::Translator: 0.11010
   version: 0.77
-version: 0.018
+version: 0.019
