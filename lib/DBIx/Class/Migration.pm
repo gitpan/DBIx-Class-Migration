@@ -1,6 +1,6 @@
 package DBIx::Class::Migration;
 
-our $VERSION = "0.020";
+our $VERSION = "0.021";
 
 use Moose;
 use JSON::XS;
@@ -285,7 +285,7 @@ sub prepare {
       $self->target_dir, $previous);
     _copy_from_to($previous_fixtures_conf, $fixture_conf_dir);
   } else {
-    print "There is not current database deployed, so I can't prepare upgrades\n";
+    print "There is no current database deployed, so I can't prepare upgrades\n";
     print "or downgrades\n";
   }
 }
@@ -476,9 +476,32 @@ sub install_version_storage {
   }
 }
 
+before [qw/install upgrade downgrade/], sub {
+  my ($self, @args) = @_;
+  %ENV = (
+    %ENV,
+    DBIC_MIGRATION_SCHEMA_CLASS => $self->schema_class,
+    DBIC_MIGRATION_TARGET_DIR => $self->target_dir,
+    DBIC_MIGRATION_FIXTURE_DIR => catdir($self->target_dir, 'fixtures', $self->dbic_dh->schema_version),
+    DBIC_MIGRATION_SCHEMA_VERSION => $self->dbic_dh->schema_version,
+    DBIC_MIGRATION_TO_VERSION => $self->dbic_dh->to_version,
+    DBIC_MIGRATION_DATABASE_VERSION => (
+      $self->dbic_dh->version_storage_is_installed ? $self->dbic_dh->database_version : 0),
+  );
+}; 
+
 __PACKAGE__->meta->make_immutable;
 
 =head1 NAME
+
+  my $dbic_dh = shift->dbic_dh;
+  print "Schema is ${\$dbic_dh->schema_version}\n";
+  if($dbic_dh->version_storage_is_installed) {
+    print "Deployed database is ${\$dbic_dh->database_version}\n";
+  } else {
+    print "Database is not currently installed\n";
+  }
+
 
 DBIx::Class::Migration - Use the best tools together for sane database migrations
 
@@ -521,6 +544,7 @@ Utility Commands:
     $migration->delete_table_rows;
     $migration->make_schema;
     $migration->install_if_needed;
+    $migration->install_version_storage;
 
 =head1 DESCRIPTION
 
@@ -985,6 +1009,24 @@ database that you are reverse engineering and you need to setup versioning
 storage since you can't rebuild the database from scratch (such as if you have
 a huge production database that you now want to start versioning).
 
+=head1 ENVIRONMENT
+
+When running L<DBIx::Class::Migration> we set some C<%ENV> variables during
+installation, up / downgrading, so that your Perl run scripts (see
+L<DBIx::Class::DeploymentHandler::DeployMethod::SQL::Translator\'PERL SCRIPTS'>)
+can receive some useful information.  The Following C<%ENV> variables are set:
+
+    DBIC_MIGRATION_SCHEMA_CLASS => $self->schema_class
+    DBIC_MIGRATION_TARGET_DIR => $self->target_dir
+    DBIC_MIGRATION_FIXTURE_DIR => catdir($self->target_dir, 'fixtures', $self->dbic_dh->schema_version),
+    DBIC_MIGRATION_SCHEMA_VERSION => $self->dbic_dh->schema_version
+    DBIC_MIGRATION_TO_VERSION => $self->dbic_dh->to_version
+    DBIC_MIGRATION_DATABASE_VERSION => $self->dbic_dh->schema_version || 0
+
+You might find having these available in your migration scripts useful for
+doing things like 'populate a database from a fixture set, if it exists, but
+if not run a bunch of inserts.
+
 =head1 THANKS
 
 Because of the awesomeness of CPAN and the work of many others, all this
@@ -1028,20 +1070,4 @@ This library is free software; you can redistribute it and/or modify it under
 the same terms as Perl itself.
 
 =cut
-
-__END__
-
-TODO
-
-list-fixture-history
-list-migration-history
-delete fixture/migration version
-list-fixture-sets
-?? From version? ??
-Dzil and module install plugins
-shell version
-add ability to exclude some tables from drop/delete
-
-?? patch DH to abstract the filesysteem storage and get methods for 'last/next version'
-?? patch DBIC-deploymenthander for autoversions
 

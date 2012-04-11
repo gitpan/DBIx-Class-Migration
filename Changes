@@ -1,5 +1,12 @@
 Revision history for DBIx-Class-Migration
 
+0.021  11 April 2012
+        - Documentation and debug output fixes (RsrchBoy++)
+        - fixed regression when using DBIC:DeploymentHandler v0.002112+
+          (lxp@cpan.org++)
+        - New Feature: We set  %ENV variables for key settings so that
+          information is passed to install / up-downgrade scripts.
+
 0.020  28 March 2012
         - fixed typo that caused new command added in 0.018 to fail (nour.sharabash++)
         - documentation typo fixes (logie17++)
