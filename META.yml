@@ -38,4 +38,4 @@ requires:
   Pod::Parser: 1.51
   SQL::Translator: 0.11010
   version: 0.77
-version: 0.021
+version: 0.022
