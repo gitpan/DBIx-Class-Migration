@@ -158,6 +158,7 @@ lib/DBIx/Class/Migration/Tutorial/ThirdMigration.pod
 lib/Test/DBIx/Class/FixtureCommand/Population.pm
 t/00-clean.t
 t/help.t
+t/install-version-storage.t
 t/lib/Local/Schema.pm
 t/lib/Local/Schema/Result/Artist.pm
 t/lib/Local/Schema/Result/ArtistCd.pm
