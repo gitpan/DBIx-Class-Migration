@@ -1,13 +1,13 @@
 package DBIx::Class::Migration;
 
-our $VERSION = "0.025";
+our $VERSION = "0.026";
 
 use Moose;
 use JSON::XS;
 use File::Copy 'cp';
 use File::Spec::Functions 'catdir', 'catfile';
 use File::Path 'mkpath', 'remove_tree';
-use MooseX::Types::LoadableClass 'LoadableClass';
+use DBIx::Class::Migration::Types 'LoadableClass', 'LoadableDBICSchemaClass';
 use Class::Load 'load_class';
 use Devel::PartialDump;
 use SQL::Translator;
@@ -42,7 +42,7 @@ has schema_class => (
   is => 'ro',
   predicate=>'has_schema_class',
   required=>0,
-  isa => LoadableClass,
+  isa => LoadableDBICSchemaClass,
   coerce=>1);
 
 has schema_args => (is=>'ro', isa=>'ArrayRef', lazy_build=>1);

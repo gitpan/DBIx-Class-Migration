@@ -42,14 +42,16 @@ my %WriteMakefileArgs = (
     "JSON::XS" => "2.32",
     "Moose" => 0,
     "MooseX::Attribute::ENV" => "0.02",
-    "MooseX::Getopt" => 0,
+    "MooseX::Getopt" => "0.45",
     "MooseX::Traits::Pluggable" => 0,
+    "MooseX::Types" => 0,
     "MooseX::Types::LoadableClass" => 0,
     "Pod::Parser" => "1.51",
     "SQL::Translator" => "0.11010",
+    "Text::Brew" => 0,
     "version" => "0.77"
   },
-  "VERSION" => "0.025",
+  "VERSION" => "0.026",
   "test" => {
     "TESTS" => "t/*.t"
   }

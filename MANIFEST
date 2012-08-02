@@ -155,6 +155,7 @@ lib/DBIx/Class/Migration/Tutorial/SecondMigration.pod
 lib/DBIx/Class/Migration/Tutorial/Setup.pod
 lib/DBIx/Class/Migration/Tutorial/Testing.pod
 lib/DBIx/Class/Migration/Tutorial/ThirdMigration.pod
+lib/DBIx/Class/Migration/Types.pm
 lib/Test/DBIx/Class/FixtureCommand/Population.pm
 t/00-clean.t
 t/help.t
