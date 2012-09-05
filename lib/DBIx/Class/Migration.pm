@@ -1,6 +1,6 @@
 package DBIx::Class::Migration;
 
-our $VERSION = "0.028";
+our $VERSION = "0.029";
 
 use Moose;
 use JSON::XS;
@@ -169,6 +169,10 @@ has deployment_handler_class => (
 
     (load_class "SQL::Translator::Producer::$_" ||
       die "No SQLT Producer for $_") for @$databases;
+
+    die "A \$VERSION needs to be specified in your schema class ${\$self->_infer_schema_class}"
+    unless $self->schema->schema_version;
+
 
     $self->deployment_handler_class->new({
       schema => $self->schema,
