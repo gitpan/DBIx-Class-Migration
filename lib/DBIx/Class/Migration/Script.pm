@@ -24,7 +24,7 @@ has includes => (
   is => 'ro',
   isa => 'ArrayRef',
   predicate => 'has_includes',
-  cmd_aliases => ['I', 'libs']);
+  cmd_aliases => ['include','I', 'lib','libs']);
 
 has schema => (is=>'ro', predicate=>'has_schema');
 
@@ -52,7 +52,7 @@ has to_version => (traits => [ 'Getopt' ], is => 'ro', isa => 'Int',
 has databases => (traits => [ 'Getopt' ], is => 'ro', isa => 'ArrayRef',
   predicate=>'has_databases', cmd_aliases => 'database');
 
-has sandbox_class =>  (traits => [ 'Getopt', 'ENV' ], is => 'ro', isa => 'Str',
+has sandbox_class => (traits => [ 'Getopt', 'ENV' ], is => 'ro', isa => 'Str',
   predicate=>'has_sandbox_class', default=>SANDBOX_SQLITE,
   cmd_aliases => ['T','sb'], env_prefix=>ENV_PREFIX);
 
@@ -150,14 +150,11 @@ sub cmd_populate {
 
 sub cmd_help {
   my ($self, $subhelp) = @_;
-  if($subhelp) {
-    die "detailed help not yet available";
-  } else {
-    Pod::Usage::pod2usage(
-      -sections => ['COMMANDS'],
-      -verbose => 99,
-      -input => Pod::Find::pod_where({-inc => 1}, __PACKAGE__));
-  }
+  my $docs = "DBIx::Class::Migration::Script::Help" . ($subhelp ? "::$subhelp" : "");
+  Pod::Usage::pod2usage(
+    -verbose => 2,
+    -exitval => 'NOEXIT',
+    -input => Pod::Find::pod_where({-inc => 1}, $docs));
 }
 
 sub _import_libs {
@@ -208,7 +205,7 @@ DBIx::Class::Migration::Script - Tools to manage database Migrations
 =head1 SYNOPSIS
 
     dbic-migration status \
-      --libs="lib" \
+      --lib="lib" \
       --schema_class='MyApp::Schema' \
       --dsn='DBI:SQLite:myapp.db'
 
@@ -448,94 +445,67 @@ as well as the options / flags associated with each command.
 
 =head2 help
 
-Summary of commands and aliases.
+See L<DBIx::Class::Migration::Script::Help::help>.
 
 =head2 version
 
-prints the current version of the application to STDOUT
+See L<DBIx::Class::Migration::Script::Help::version>.
 
 =head2 status
 
-Returns the state of the deployed database (if it is deployed) and the state
-of the current C<schema>
+See L<DBIx::Class::Migration::Script::Help::status>.
 
 =head2 prepare
 
-Creates a C<fixtures> and C<migrations> directory under L</target_dir> (if they
-don't already exist) and makes deployment files for the current schema.  If
-deployment files exist, will fail unless you L</overwrite_migrations> and
-L</overwrite_fixtures>.
+See L<DBIx::Class::Migration::Script::Help::prepare>.
 
 =head2 install
 
-Installs either the current schema version (if already prepared) or the target
-version specified via L</to_version> to the database connected via the L</dsn>,
-L</username> and L</password>
+See L<DBIx::Class::Migration::Script::Help::install>.
 
 =head2 upgrade
 
-Run upgrade files to either bring the database into sync with the current
-schema version, or stop at an intermediate version specified via L</to_version>
+See L<DBIx::Class::Migration::Script::Help::upgrade>.
 
 =head2 downgrade
 
-Run down files to bring the database down to the version specified via
-L</to_version>
+See L<DBIx::Class::Migration::Script::Help::downgrade>.
 
 =head2 dump_named_sets
 
-Given listed L<fixture_sets>, dump files for the current database version (not
-the current schema version)
+See L<DBIx::Class::Migration::Script::Help::dump_named_sets>.
 
 =head2 dump_all_sets
 
-Just dump all the sets for the current database
+See L<DBIx::Class::Migration::Script::Help::dump_all_sets>.
 
 =head2 populate
 
-Given listed L<fixture_sets>, populate a database with fixtures for the matching
-version (matches database version to fixtures, not the schema version)
+See L<DBIx::Class::Migration::Script::Help::populate>.
 
 =head2 drop_tables
 
-Drops all the tables in the connected database with no backup or recovery.  For
-real! (Make sure you are not connected to Prod, for example)
+See L<DBIx::Class::Migration::Script::Help::drop_tables>.
 
 =head2 delete_table_rows
 
-does a C<delete> on each table in the database, which clears out all your data
-but preserves tables.  For Real!  You might want this if you need to load
-and unload fixture sets during testing, or perhaps to get rid of data that
-accumulated in the database while running an app in development, before dumping
-fixtures.
-
-Skips the table C<dbix_class_deploymenthandler_versions>, so you don't lose
-deployment info (this is different from L</drop_tables> which does delete it.)
+See L<DBIx::Class::Migration::Script::Help::delete_table_rows>.
 
 =head2 make_schema
 
-Creates DBIC schema files from the currently deployed database into your target
-directory.  You can use this to bootstrap your ORM, or if you get confused about
-what the deployment perl run files get for schema.
+See L<DBIx::Class::Migration::Script::Help::make_schema>.
 
 =head2 install_if_needed
 
-Install the database to the current C<$schema> version if it is not currently
-installed.  Otherwise this is a nop (even if the database is behind the schema).
-
+See L<DBIx::Class::Migration::Script::Help::install_if_needed>.
 
 =head2 install_version_storage
 
-If the targeted (connected) database does not have the versioning tables
-installed, this will install them.  The version is set to whatever your
-C<schema> version currently is.
+See L<DBIx::Class::Migration::Script::Help::install_version_storage>.
 
 =head2 diagram
 
-Experimental feature.  This command will place a file in your L</target_dir>
-called C<db-diagram-vXXX.png> where C<XXX> is he current C<schema> version.
-
-This feature is experimental and currently does not offer any options.
+See L<DBIx::Class::Migration::Script::Help::diagram>.
 
 =head2 Command Flags
 
@@ -543,40 +513,15 @@ The following flags are used to modify or inform commands.
 
 =head3 includes
 
-Aliases: I, lib
-Value: String or Array of Strings
-
-    dbic-migration --includes lib --includes /opt/perl/lib
-
-Does the same thing as the Perl command line interpreter flag C<I>.  Adds all
-the listed paths to C<@INC>.  You will likely use this in order to find your
-application schema (subclass of L<DBIx::Class::Schema>.
+See L<DBIx::Class::Migration::Script::Help::includes>.
 
 =head3 schema_class
 
-Value: Str
-
-    dbic-migration prepare --schema_class MyApp::Schema -Ilib
-
-Used to specify the L<DBIx::Class::Schema> subclass which is the core of your
-L<DBIx::Class> based ORM managed system.  This is required and the application
-cannot function without one.
+See L<DBIx::Class::Migration::Script::Help::schema_class>.
 
 =head3 target_dir
 
-Aliases: D
-Value: Str
-
-    dbic-migration prepare --schema_class MyApp::Schema --target_dir /opt/share
-
-We need a directory path that is used to store your fixtures and migration
-files.  By default this will be the C<share> directory for the application
-where your L</schema_class> resides.  I recommend you leave it alone since
-this is a reasonable Perl convention for non code data, and there's a decent
-ecosystem of tools around it, however if you need to place the files in an
-alternative location (for example you have huge fixture sets and you don't
-want them in you core repository, or you can't store them in a limited space
-filesystem) this will let you do it.  Option and defaults as discussed.
+See L<DBIx::Class::Migration::Script::Help::target_dir>.
 
 =head3 username
 
@@ -601,97 +546,23 @@ at L</target_dir>.
 
 =head3 force_overwrite
 
-Aliases: O
-Value: Bool (default: False)
-
-Sometimes you may wish to prepare migrations for the same version more than
-once (say if you are developing a new version and need to try out a few options
-first).  This lets you deploy over an existing set.  This will of course destroy
-and manual modifications you made, buyer beware.)
-
-    dbic-migration prepare --overwrite_migrations
+See L<DBIx::Class::Migration::Script::Help::force_overwrite>
 
 =head3 to_version
 
-Aliases: D
-Value: Str (default: Current VERSION of Schema)
-
-    dbic-migration install --to_version 5
-
-Used to specify which version we are going to deploy.  Defaults to whatever
-is the most current version you've prepared.
-
-Use this when you need to force install an older version, such as when you are
-roundtripping prepares while fiddling with a new database version.
+See L<DBIx::Class::Migration::Script::Help::to_version>
 
 =head3 databases
 
-Alias: database
-Value: Str or Array of Str (default: SQLite)
-
-You can prepare deployment for any database type that L<SQLT> understand.  By
-default we only prepare a deployment version for the database which matches
-the L<dsn> you specified but you can use this to prepare additional deployments
-
-    dbic-migration prepare --database SQLite --database mysql
-
-Please note if you choose to manually set this value, you won't automatically
-get the default, unless you specify as above
+See L<DBIx::Class::Migration::Script::Help::databases>
 
 =head3 fixture_sets
 
-Alias: fixture_set
-Value: Str or Array of Str (default: all set)
-
-When dumping or populating fixture sets, you use this to set which sets.
-
-    dbic-migration dump --fixture_set roles --fixture_set core
-
-Please note that if you manually describe your sets as in the above example,
-you don't automatically get the C<all_tables> set, which is a fixture set of all
-database information and not 'all' the sets.
-
-We automatically create the C<all_tables> fixture set description file for you when
-you prepare a new migration of the schema.  You can use this set for early
-testing but I recommend you study L<DBIx::Class::Fixtures> and learn the set
-configuration rules, and create limited fixture sets for given purposes, rather
-than just dump / populate everything, since that is like to get big pretty fast
-
-My recommendation is to create a core 'seed' set, of default database values,
-such as role types, default users, lists of countries, etc. and then create a
-'demo' or 'dev' set that contains extra information useful to populate a
-database so that you can run test cases and develop against.
+See L<DBIx::Class::Migration::Script::Help::fixture_sets>
 
 =head3 sandbox_class
 
-Alias: T
-Value: String (default: SqliteSandbox)
-
-If you don't have a target database for your migrations (as you might not for
-your development setup, or during initial prototyping) we automatically create
-a local database sandbox in your L</target_dir>.  By default this is a
-L<DBD::Sqlite> single file database, since this is easy to get installed (you
-probably already have it) and is easy to work with.  However, we can also create
-database sandboxes for mysql and postgresql (although you will need to get the
-L<Test::mysqld> and/or L<Test::postgresql> as well as the correcct DBD installed).
-
-This is handy as you move toward a real production target and know the eventual
-database for production.  If you choose to create a postgresql or mysql database
-sandbox, they will automatically be created in your L</target_dir>, along with
-some helper scripts. See L<DBIx::Class::Migration::PostgresqlSandbox> and
-L<DBIx::Class::Migration::MySQLSandbox> for more documentation.
-
-Assuming you've prepared migrations for an alternative sandbox, such as MySQL:
-
-    dbic-migration install --schema_class MyApp::Schema --sandbox_class MySQLSandbox
-
-Would install it.  Like some of the other option flags you can specify with an
-%ENV setting:
-
-    export DBIC_MIGRATION_SANDBOX_CLASS=MySQLSandbox
-
-This would be handy if you are always going to target one of the alternative
-sandbox types.
+See L<DBIx::Class::Migration::Script::Help::sandbox_class>
 
 The default sqlite sandbox is documented at L<DBIx::Class::Migration::SQLiteSandbox>
 although this single file database is pretty straightforward to use.

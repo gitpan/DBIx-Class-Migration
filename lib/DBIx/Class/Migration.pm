@@ -1,6 +1,6 @@
 package DBIx::Class::Migration;
 
-our $VERSION = "0.026";
+our $VERSION = "0.028";
 
 use Moose;
 use JSON::XS;
@@ -877,8 +877,7 @@ of the current C<schema> version.  Sends this as a string to STDOUT
 
 Creates a C<fixtures> and C<migrations> directory under L</target_dir> (if they
 don't already exist) and makes deployment files for the current schema.  If
-deployment files exist, will fail unless you L</overwrite_migrations> and
-L</overwrite_fixtures>.
+deployment files exist, will fail unless you L</overwrite_migrations>. 
 
 The C<migrations> directory reflects a directory structure as documented in
 L<DBIx::Class::DeploymentHandler>.
@@ -892,7 +891,10 @@ safety reasons, we never overwrite any fixture configs.
 
 Installs either the current schema version (if already prepared) or the target
 version specified via any C<to_version> flags sent as an L<dbic_dh_args> to the
-database which is connected via L</schema>
+database which is connected via L</schema>.
+
+If you try to install to a database that has already been installed, you'll get
+an error.  See L</drop_tables>.
 
 =head2 upgrade
 
@@ -1048,6 +1050,19 @@ don't need to write my own build and deployment tools.
 =head1 AUTHOR
 
 John Napiorkowski L<email:jjnapiork@cpan.org>
+
+=head1 CONTRIBUTORS
+
+The following is a list of identified contributors.  Please let me know if I
+missed you.
+
+    https://github.com/pjcj
+    https://github.com/chromatic
+    https://github.com/bentglasstube
+    https://github.com/logie17
+    https://github.com/RsrchBoy
+    https://github.com/vkroll
+    https://github.com/felliott
 
 =head1 SEE ALSO
 
