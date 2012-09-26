@@ -184,17 +184,20 @@ sub _defaults {
 
 sub run {
   my ($self) = @_;
-  my ($cmd, @extra_argv) = @{$self->extra_argv};
+  my ($argv, @extra_argv) = @{$self->extra_argv};
 
   $self->_import_libs(@{$self->includes})
     if $self->has_includes;
 
-  if(!$cmd || $cmd eq 'help') {
+  if(!$argv || $argv eq 'help') {
     $self->cmd_help(@extra_argv);
   } else {
-    die "Extra argv detected - command only please\n" if @extra_argv;
-    die "No such command ${cmd}\n" unless $self->can("cmd_${cmd}");
-    $self->${\"cmd_${cmd}"};
+    foreach my $cmd ($argv, @extra_argv) {
+      $self->can("cmd_${cmd}") ?
+        $self->${\"cmd_${cmd}"} :
+        die "No such command ${cmd}\n";
+    }
+        
   }
 }
 
@@ -454,14 +457,14 @@ L<DBIx::Class::Fixtures> to understand what additional arguments may be of use.
 Accepts: HashRef, Not Required.
 
 If you are specifying a DSN, you might need to provide some additional args
-to L<DBI> (see L<DBIx::Class::Storage::DB/connect_info> for more).
+to L<DBI> (see L<DBIx::Class::Storage::DBI/connect_info> for more).
 
 =head2 dbic_connect_attrs
 
 Accepts: HashRef, Not Required.
 
 If you are specifying a DSN, you might need to provide some additional args
-to L<DBIx::Class> (see L<DBIx::Class::Storage::DB/connect_info> for more).
+to L<DBIx::Class> (see L<DBIx::Class::Storage::DBI/connect_info> for more).
 
 You can also see L<DBIx::Class::Storage::DBI/DBIx::Class-specific-connection-attributes>
 for more information on what this can do for you.  Chances are good if you

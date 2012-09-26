@@ -10,7 +10,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300020, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 4.300023, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -21,7 +21,7 @@ requires:
   Config::MySQL: 0.02
   DBD::SQLite: 1.35
   DBIx::Class::DeploymentHandler: 0.002100
-  DBIx::Class::Fixtures: 1.001014
+  DBIx::Class::Fixtures: 1.001016
   DBIx::Class::Schema::Loader: 0.07017
   Devel::PartialDump: 0
   File::Copy: 0
@@ -44,4 +44,4 @@ resources:
   bugtracker: https://github.com/jjn1056/DBIx-Class-Migration/issues
   homepage: https://github.com/jjn1056/DBIx-Class-Migration
   repository: https://github.com/jjn1056/DBIx-Class-Migration.git
-version: 0.030
+version: 0.031

@@ -138,6 +138,7 @@ lib/DBIx/Class/Migration/MySQLSandbox.pm
 lib/DBIx/Class/Migration/Population.pm
 lib/DBIx/Class/Migration/PostgresqlSandbox.pm
 lib/DBIx/Class/Migration/RunScript.pm
+lib/DBIx/Class/Migration/RunScript/Trait/Populate.pm
 lib/DBIx/Class/Migration/RunScript/Trait/SchemaLoader.pm
 lib/DBIx/Class/Migration/Sandbox.pm
 lib/DBIx/Class/Migration/SchemaLoader.pm
@@ -199,6 +200,7 @@ t/lib/Local/Schema/ResultSet/Artist.pm
 t/migration-mysql.t
 t/migration-postgresql.t
 t/migration-sqlite.t
+t/ordering.t
 t/runscript.t
 t/share/donotremove.txt
 t/use.t

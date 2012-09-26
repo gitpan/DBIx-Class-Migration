@@ -31,7 +31,7 @@ my %WriteMakefileArgs = (
     "Config::MySQL" => "0.02",
     "DBD::SQLite" => "1.35",
     "DBIx::Class::DeploymentHandler" => "0.002100",
-    "DBIx::Class::Fixtures" => "1.001014",
+    "DBIx::Class::Fixtures" => "1.001016",
     "DBIx::Class::Schema::Loader" => "0.07017",
     "Devel::PartialDump" => 0,
     "File::Copy" => 0,
@@ -51,7 +51,7 @@ my %WriteMakefileArgs = (
     "Text::Brew" => 0,
     "version" => "0.77"
   },
-  "VERSION" => "0.030",
+  "VERSION" => "0.031",
   "test" => {
     "TESTS" => "t/*.t"
   }
