@@ -68,6 +68,9 @@ has dbic_connect_attrs => (traits => [ 'Getopt' ], is => 'ro', isa => 'HashRef',
 has dbi_connect_attrs => (traits => [ 'Getopt' ], is => 'ro', isa => 'HashRef',
   predicate=>'has_dbi_connect_attrs');
 
+has extra_schemaloader_args => (traits => [ 'Getopt' ], is => 'ro', isa => 'HashRef',
+  predicate=>'has_extra_schemaloader_args');
+
 has fixture_sets => (
   traits => [ 'Getopt' ],
   is=>'ro',
@@ -146,6 +149,9 @@ sub _build_migration {
 
   $args{dbic_fixtures_extra_args} = $self->dbic_fixtures_extra_args
     if $self->has_dbic_fixtures_extra_args;
+
+  $args{extra_schemaloader_args} = $self->extra_schemaloader_args
+    if $self->has_extra_schemaloader_args;
 
   return $self->migration_class->new(%args);
 }
@@ -473,6 +479,12 @@ well.
 
 Common uses for this is to run SQL on startup and set Postgresql search paths.
 
+=head2 extra_schemaloader_args
+
+Accepts: HashRef, Not Required.
+
+Used to populate L<DBIx::Class::Migration/extra_schemaloader_args>
+
 =head1 COMMANDS
 
     dbic-migration -Ilib install
@@ -607,6 +619,26 @@ although this single file database is pretty straightforward to use.
 
 If you are declaring the value in a subclass, you can use the pre-defined
 constants to avoid typos (see L</CONSTANTS>).
+
+=head3 dbic_fixture_class
+
+See L<DBIx::Class::Migration::Script::Help::dbic_fixture_class>
+
+=head3 dbic_fixtures_extra_args
+
+See L<DBIx::Class::Migration::Script::Help::dbic_fixtures_extra_args>
+
+=head3 dbic_connect_attrs
+
+See L<DBIx::Class::Migration::Script::Help::dbic_connect_attrs>
+
+=head3 dbi_connect_attrs
+
+See L<DBIx::Class::Migration::Script::Help::dbi_connect_attrs>
+
+=head3 extra_schemaloader_args
+
+See L<DBIx::Class::Migration::Script::Help::extra_schemaloader_args>
 
 =head1 OPTIONAL METHODS FOR SUBCLASSES
 
