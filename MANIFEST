@@ -138,6 +138,7 @@ lib/DBIx/Class/Migration/MySQLSandbox.pm
 lib/DBIx/Class/Migration/Population.pm
 lib/DBIx/Class/Migration/PostgresqlSandbox.pm
 lib/DBIx/Class/Migration/RunScript.pm
+lib/DBIx/Class/Migration/RunScript/Trait/Dump.pm
 lib/DBIx/Class/Migration/RunScript/Trait/Populate.pm
 lib/DBIx/Class/Migration/RunScript/Trait/SchemaLoader.pm
 lib/DBIx/Class/Migration/RunScript/Trait/TargetPath.pm
