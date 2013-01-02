@@ -151,6 +151,7 @@ lib/DBIx/Class/Migration/Script/Help/dbi_connect_attrs.pod
 lib/DBIx/Class/Migration/Script/Help/dbic_connect_attrs.pod
 lib/DBIx/Class/Migration/Script/Help/dbic_fixture_class.pod
 lib/DBIx/Class/Migration/Script/Help/dbic_fixtures_extra_args.pod
+lib/DBIx/Class/Migration/Script/Help/delete_named_sets.pod
 lib/DBIx/Class/Migration/Script/Help/delete_table_rows.pod
 lib/DBIx/Class/Migration/Script/Help/diagram.pod
 lib/DBIx/Class/Migration/Script/Help/downgrade.pod
@@ -204,10 +205,18 @@ t/lib/Local/Schema/Result/Cd.pm
 t/lib/Local/Schema/Result/Country.pm
 t/lib/Local/Schema/Result/Track.pm
 t/lib/Local/Schema/ResultSet/Artist.pm
+t/lib/Local/v2/Schema.pm
+t/lib/Local/v2/Schema/Result/Artist.pm
+t/lib/Local/v2/Schema/Result/ArtistCd.pm
+t/lib/Local/v2/Schema/Result/Cd.pm
+t/lib/Local/v2/Schema/Result/Country.pm
+t/lib/Local/v2/Schema/Result/Track.pm
+t/lib/Local/v2/Schema/ResultSet/Artist.pm
 t/migration-mysql.t
 t/migration-postgresql.t
 t/migration-sqlite.t
 t/ordering.t
 t/runscript.t
 t/share/donotremove.txt
+t/upgrade-downgrade-sqlite.t
 t/use.t
