@@ -51,7 +51,7 @@ my %WriteMakefileArgs = (
     "Text::Brew" => 0,
     "version" => "0.77"
   },
-  "VERSION" => "0.036",
+  "VERSION" => "0.037",
   "test" => {
     "TESTS" => "t/*.t"
   }
