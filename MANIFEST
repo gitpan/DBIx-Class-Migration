@@ -215,6 +215,7 @@ t/lib/Local/v2/Schema/ResultSet/Artist.pm
 t/migration-mysql.t
 t/migration-postgresql.t
 t/migration-sqlite.t
+t/missing-schema-version.t
 t/ordering.t
 t/runscript.t
 t/share/donotremove.txt
