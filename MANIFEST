@@ -218,6 +218,7 @@ t/migration-sqlite.t
 t/missing-schema-version.t
 t/ordering.t
 t/runscript.t
+t/script.t
 t/share/donotremove.txt
 t/upgrade-downgrade-sqlite.t
 t/use.t
