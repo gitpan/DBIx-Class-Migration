@@ -136,6 +136,7 @@ lib/DBIx/.DS_Store
 lib/DBIx/Class/.DS_Store
 lib/DBIx/Class/Migration.pm
 lib/DBIx/Class/Migration/.DS_Store
+lib/DBIx/Class/Migration/.FAQ.pod.swp
 lib/DBIx/Class/Migration/FAQ.pod
 lib/DBIx/Class/Migration/Features.pod
 lib/DBIx/Class/Migration/MySQLSandbox.pm
